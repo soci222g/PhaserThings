@@ -8,66 +8,90 @@ class LinkScene extends Phaser.Scene{
     preload()//cargar assets
     {
         this.cameras.main.setBackgroundColor('AAA');
-        this.load.image('grass','assets/sprites/grass.jpg');
-        this.load.spritesheet('birdAnim','assets/sprites/birdAnim.png',{frameWidth:17, frameHeight: 12}); //cargar sprite sheet
+        this.load.image('grass','assets/sprites/grass.png');
+        this.load.spritesheet('LinkAnim','assets/sprites/link.png',{frameWidth:120, frameHeight: 130}); //cargar sprite sheet
 
     }; 
     create(){
 
        
-        this.BG = this.add.tileSprite(0,0,64, 64, 'grass').setOrigin(0);
+             this.BG = this.add.tileSprite(0,0,config.width, config.height, 'grass').setOrigin(0);
        
 
-            this.birdA = this.add.sprite(config.width/2,config.height/2,'birdAnim').setScale(3);   //spreite sheed
 
 
-            this.loadAnimationBird();
-            this.birdA.anims.play('fly'); //activa animacion especifica de elemento existente
+            this.Link = this.add.sprite(config.width/2,config.height/2,'LinkAnim').setScale(0.5);   //spreite sheed
 
 
-            //esto es sin faser
-             /*
-            this.key_right = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.RIGHT);
-            this.key_left = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.LEFT);
-            this.key_up = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.UP);
-            this.key_down = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.DOWN);    
-            */
+            this.loadAnimationLink();
+
+
+           
 
             this.cursor = this.input.keyboard.createCursorKeys();
      }; 
 
-    loadAnimationBird(){
+    loadAnimationLink(){
         this.anims.create({
+                      
 
-            key:'fly',
-            frames:this.anims.generateFrameNumbers('birdAnim',{start:0,end:2}), //determina que cantidad de frames es cada cosa (en este caso el volar es de 0 a 2)
+            key:'left',
+            frames:this.anims.generateFrameNumbers('LinkAnim',{start:10,end:19}),
             frameRate: 5,
             repeat:-1,
-            yoyo:  true
         }); //carga animaciones de un elemento
 
+         this.anims.create({
+
+            
+            key:'right',
+            frames:this.anims.generateFrameNumbers('LinkAnim',{start:30,end:39}), 
+            frameRate: 5,
+            repeat:-1,
+
+         })
+        this.anims.create({ 
+            key:'up',
+            frames:this.anims.generateFrameNumbers('LinkAnim',{start:20,end:29}), 
+            frameRate: 5,
+            repeat:-1,
+        })
+        this.anims.create({    
+             key:'down',
+            frames:this.anims.generateFrameNumbers('LinkAnim',{start:0,end:9}), 
+            frameRate: 5,
+            repeat:-1,
+        })
+
+        this.anims.create({
+            key: 'idle',
+            frames:this.anims.generateFrameNumbers('LinkAnim',{start:0,end:0}),
+        })
     };
 
 
     update(){
-        this.BG.tilePositionX += 2;
        // this.bird.angle += 1;
 
        if(this.cursor.right.isDown){
-        this.birdA.x += GamePref.HeroSpeed; 
-       }
-       if(this.cursor.left.isDown){
-        this.birdA.x -= GamePref.HeroSpeed;
-       }
-
+        this.Link.x += GamePref.HeroSpeed; 
+            this.Link.anims.play('right',true);
+        }
+        if(this.cursor.left.isDown){
+            this.Link.x -= GamePref.HeroSpeed;
+            this.Link.anims.play('left',true);        
+        }
         if(this.cursor.up.isDown){
-            this.birdA.y -= GamePref.HeroSpeed;
+            this.Link.y -= GamePref.HeroSpeed;
+                this.Link.anims.play('up',true);
         }
         if(this.cursor.down.isDown){
-            this.birdA.y += GamePref.HeroSpeed;
+            this.Link.y += GamePref.HeroSpeed;
+            this.Link.anims.play('down',true);
+            
         }
 
 
-    }; // updatea los assets
+    }; 
 }
 
