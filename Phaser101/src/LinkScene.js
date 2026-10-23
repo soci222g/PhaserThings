@@ -1,6 +1,6 @@
 class LinkScene extends Phaser.Scene{
     
-
+    movingPlayer = false;
     constructor(){
         //cridem el constructor porpi de la escena
         super({key:"LinkScene"});
@@ -29,10 +29,14 @@ class LinkScene extends Phaser.Scene{
            
 
             this.cursor = this.input.keyboard.createCursorKeys();
+
+//A B keys
+        this.key_A = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.A);
+        this.key_B = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.B);
      }; 
 
-    loadAnimationLink(){
-        this.anims.create({
+         loadAnimationLink(){
+         this.anims.create({
                       
 
             key:'left',
@@ -72,25 +76,47 @@ class LinkScene extends Phaser.Scene{
 
     update(){
        // this.bird.angle += 1;
-
-       if(this.cursor.right.isDown){
-        this.Link.x += GamePref.HeroSpeed; 
-            this.Link.anims.play('right',true);
+        
+       if(this.key_A.isDown)
+        this.movingPlayer = true;
+       else if(this.key_B.isDown)
+        this.movingPlayer = false;
+       
+       
+       if(this.movingPlayer){
+            if(this.cursor.right.isDown){
+                this.Link.x += GamePref.HeroSpeed; 
+                    this.Link.anims.play('right',true);
+                }
+                if(this.cursor.left.isDown){
+                    this.Link.x -= GamePref.HeroSpeed;
+                    this.Link.anims.play('left',true);        
+                }
+                if(this.cursor.up.isDown){
+                    this.Link.y -= GamePref.HeroSpeed;
+                        this.Link.anims.play('up',true);
+                }
+                if(this.cursor.down.isDown){
+                    this.Link.y += GamePref.HeroSpeed;
+                    this.Link.anims.play('down',true);
+                    
+                }
         }
-        if(this.cursor.left.isDown){
-            this.Link.x -= GamePref.HeroSpeed;
-            this.Link.anims.play('left',true);        
-        }
-        if(this.cursor.up.isDown){
-            this.Link.y -= GamePref.HeroSpeed;
-                this.Link.anims.play('up',true);
-        }
-        if(this.cursor.down.isDown){
-            this.Link.y += GamePref.HeroSpeed;
-            this.Link.anims.play('down',true);
+        else{
             
+            if(this.cursor.right.isDown){
+                this.BG.tilePositionX += 2;
+            }
+            if(this.cursor.left.isDown){
+                this.BG.tilePositionX -= 2;
+            }
+            if(this.cursor.up.isDown){
+                this.BG.tilePositionY -= 2;
+            }
+            if(this.cursor.down.isDown){
+                this.BG.tilePositionY += 2;
+            }
         }
-
 
     }; 
 }
