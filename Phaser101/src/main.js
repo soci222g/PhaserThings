@@ -2,7 +2,7 @@ var config ={
     type:Phaser.AUTO,
     width:640,
     height:640,
-    scene:[LinkScene], 
+    scene:[MenuScene, gameState,LinkScene], 
     render: 
     {
         pixelArt: true
