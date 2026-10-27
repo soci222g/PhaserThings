@@ -34,7 +34,7 @@ constructor(){
 
         if(this.Two.isDown){
            
-                 juego.scene.start('LinkScene');
+            juego.scene.start('LinkScene');
         }
 
     }
