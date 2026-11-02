@@ -1,3 +1,4 @@
+
 class GameState extends Phaser.Scene{
 
 constructor(){
@@ -13,7 +14,9 @@ constructor(){
         this.load.image('BackBG','background_Back.png');
         this.load.image('FlontBG','background_frontal.png');
         this.load.image('BulletJP', 'spr_bullet_0.png');
-
+        
+        this.load.spritesheet('enemi-Midium', 'enemy-medium.png',{frameWidth:32, frameHeight: 16});
+        this.load.spritesheet('enemi-Big', 'enemy-medium.png',{frameWidth:32, frameHeight: 32});
 
         this.load.spritesheet('ShipAnim','naveAnim.png',{frameWidth:16, frameHeight: 24}); //cargar sprite sheet
 
@@ -29,9 +32,12 @@ constructor(){
         this.BG_Back = this.add.tileSprite(0,0,config.width, config.height, 'BackBG').setOrigin(0);
 
                     //con el .phisycs anyades fiscas
-        this.Ship = this.physics.add.sprite(config.width/2,config.height/2,'ShipAnim').setScale(1);
+        this.Ship = this.physics.add.sprite(config.width/2,config.height - 25,'ShipAnim').setScale(1);
 
         this.Ship.body.setCollideWorldBounds(true);
+        
+        
+        this.factory = new FactoryEnemy(this);
 
 
         this.loadAnimationShip();
@@ -88,10 +94,9 @@ constructor(){
           var bullet  = this.bulletPool.getFirst(false);//pilla el primer element del grup que estigui desactivada. 
 
           if(!bullet){ 
-console.log("Shoot");
+                console.log("Shoot");
 
-               //bullet =this.add.sprite(this.Ship.x,this.Ship.body.top, 'BulletJP');
-                bullet = new bullet(this,this.Ship.x, this.Ship.y.top);
+                bullet = new Bullet(this,this.Ship.x, this.Ship.y.top);
                 this.bulletPool.add(bullet);
           }
           else{
@@ -102,7 +107,11 @@ console.log("Shoot");
           bullet.body.setVelocityY(gamePrefs.BULLET_SPEED);
     }
 
-    update(){
+    
+
+
+    update(time, delta){
+        this.factory.update(time, delta);
         this.BG_Front.tilePositionY -= 1;
         this.BG_Back.tilePositionY -= 0.25
 
