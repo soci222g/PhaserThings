@@ -16,7 +16,7 @@ constructor(){
         this.load.image('BulletJP', 'spr_bullet_0.png');
         
         this.load.spritesheet('enemi-Midium', 'enemy-medium.png',{frameWidth:32, frameHeight: 16});
-        this.load.spritesheet('enemi-Big', 'enemy-medium.png',{frameWidth:32, frameHeight: 32});
+        this.load.spritesheet('enemi-Big', 'enemy-big.png',{frameWidth:32, frameHeight: 32});
 
         this.load.spritesheet('ShipAnim','naveAnim.png',{frameWidth:16, frameHeight: 24}); //cargar sprite sheet
 

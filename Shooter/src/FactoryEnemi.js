@@ -16,8 +16,11 @@ class FactoryEnemy {
   update(time, delta){
     this.currentTime += delta;
     if(this.currentTime >= this.timeSpawn){
-        this.currentTime = Phaser.Math.Between(2000, 5000);
-        this.CreateEnemy('enemi-Midium', 32)
+        this.currentTime = 0;
+        this.timeSpawn = Phaser.Math.Between(2000,5000);
+        this.CreateEnemy('enemi-Midium', 32);
+                
+    
     }
 
   }

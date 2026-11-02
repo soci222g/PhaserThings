@@ -9,7 +9,6 @@ class Enemi extends Phaser.GameObjects.Sprite {
 
     this.loadAnimationShip(_spriteName);
     this.play('idel_enemi');
-    this.name = _spriteName;
   }
 
   loadAnimationShip(spriteName) {
