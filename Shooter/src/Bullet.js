@@ -7,6 +7,7 @@ class Bullet extends Phaser.GameObjects.Sprite{
         //this.body.setVelocity(gamePrefs.BULLET_SPEED);
         _scene.add.existing(this);
 
+        this.Damage = gamePrefs.BULLET_DAMAGE;
 
         //sound
     }

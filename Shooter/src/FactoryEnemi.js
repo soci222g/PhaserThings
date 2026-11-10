@@ -4,13 +4,27 @@ class FactoryEnemy {
     this.timeSpawn = 5000; //esta en ms
     this.currentTime = this.timeSpawn;
 
-    this.deltaTime = 0;
+   this.EnemyPull = this.scene.physics.add.group();
+   
+   this.deltaTime = 0;
   }
 
   CreateEnemy(type, width) {
+    var enemy  = this.EnemyPull.getFirst(false);
     const randomX = Phaser.Math.Between(width, config.width - width);
-    return new Enemi(this.scene, randomX, -60, type);
+     if(!enemy){ 
+                console.log("Shoot");
+
+                enemy = new Enemi(this.scene, randomX, -60, type);
+                this.EnemyPull.add(enemy);
+      }
+      else {
+        enemy.setActive(true);
+        enemy.body.reset(randomX,-60);
+      }
   }
+
+
 
 
   update(time, delta){

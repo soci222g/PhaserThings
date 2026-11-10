@@ -17,6 +17,8 @@ constructor(){
         
         this.load.spritesheet('enemi-Midium', 'enemy-medium.png',{frameWidth:32, frameHeight: 16});
         this.load.spritesheet('enemi-Big', 'enemy-big.png',{frameWidth:32, frameHeight: 32});
+    
+        this.load.spritesheet('Explosion', 'explosion.png',{frameWidth:16, frameHeight: 16});
 
         this.load.spritesheet('ShipAnim','naveAnim.png',{frameWidth:16, frameHeight: 24}); //cargar sprite sheet
 
@@ -55,6 +57,41 @@ constructor(){
             },
             this //estp es para que dentro de la funcion el this sea el concepto de la escena i no de si mismo. 
         );
+
+
+this.physics.add.overlap(
+    this.bulletPool,
+    this.factory.EnemyPull,
+    this.hitEnemy,
+    null,
+    this
+    //()->{this.hitEnemy(),
+);
+
+    }
+
+    hitEnemy(_bullet,_enemy){
+        _bullet.setActive(false);
+        
+        new Explosion(this, _bullet.x,_bullet.y,'Explosion');
+
+        _bullet.body.reset(-100,-100);
+       
+
+        _enemy.Healt -= _bullet.Damage;
+        if(_enemy.Healt > 0){
+            //parpadeo i inbulnerable.
+        }
+        else{
+
+            _enemy.setActive(false);
+            _enemy.body.reset(-200,-200);
+            _enemy.Healt = gamePrefs.ENEMY_HEALTH;
+            //eliminar target,
+            //update de la score 
+            //calcular el drop de power up
+            //reciclaje del enemy
+        }
     }
 
 
@@ -96,7 +133,7 @@ constructor(){
           if(!bullet){ 
                 console.log("Shoot");
 
-                bullet = new Bullet(this,this.Ship.x, this.Ship.y.top);
+                bullet = new Bullet(this,this.Ship.x, this.Ship.y);
                 this.bulletPool.add(bullet);
           }
           else{
@@ -111,7 +148,9 @@ constructor(){
 
 
     update(time, delta){
+        
         this.factory.update(time, delta);
+       
         this.BG_Front.tilePositionY -= 1;
         this.BG_Back.tilePositionY -= 0.25
 

@@ -5,6 +5,8 @@ class Enemi extends Phaser.GameObjects.Sprite {
     _scene.add.existing(this);
     _scene.physics.add.existing(this);
 
+    this.Healt = gamePrefs.ENEMY_HEALTH;
+
     this.body.setVelocityY(gamePrefs.ENEMY_SPEED);
 
     this.loadAnimationShip(_spriteName);
@@ -24,5 +26,9 @@ class Enemi extends Phaser.GameObjects.Sprite {
 
   preUpdate(time, delta) {
     super.preUpdate(time, delta);
+
+     if(this.y >= config.height + 16){ //magic number es la alutra del enemi
+            this.setActive(false);
+        }
   }
 }
