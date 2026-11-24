@@ -41,3 +41,8 @@ export const SCALE = {
     ZOOM: 2
 
 };
+
+export const ENEMY ={
+    SPEED_ENEMY: 150,
+    JUMP_FORCE_ENEMY: -300
+}

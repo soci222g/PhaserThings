@@ -1,5 +1,8 @@
 import { LEVEL_SIZE, HERO, SCALE } from "../core/constants.js";
 
+import { Jumper } from "../entities/enemies/Jumper.js";
+import { Hero } from "../entities/Hero.js";
+
 export class Level1 extends Phaser.Scene
 {
     constructor()
@@ -18,6 +21,10 @@ export class Level1 extends Phaser.Scene
         this.load.setPath('assets/Sprite/Spritesheets');
         this.load.spritesheet('entry','entry.png',{frameWidth: 32, frameHeight: 40});
         this.load.spritesheet('hero','hero.png',{frameWidth: 32, frameHeight: 32});
+        this.load.spritesheet('jumper','jumper.png',{frameWidth: 32, frameHeight: 32});
+        this.load.spritesheet('slime','slime.png',{frameWidth: 32, frameHeight: 32});
+
+
 
         this.load.setPath('assets/tiled/tilesets');
         this.load.image('tileset_walls','tileset_walls.png');
@@ -27,6 +34,7 @@ export class Level1 extends Phaser.Scene
         this.load.tilemapTiledJSON('level1', 'level1.json');
 
     }
+
     create()
     { //Pinta assets en pantalla
         //Pintamos el fondo
@@ -51,7 +59,10 @@ export class Level1 extends Phaser.Scene
 
 
         //hero
-        this.hero = this.physics.add.sprite(65, 100, 'hero');
+        this.hero = new Hero(this, 65, 100, 'hero');
+
+
+        this.jumper = new Jumper(this, 240, 304, 'jumper');
 
         //entri door
         this.entry = this.add.sprite(65, 268, 'entry')
@@ -68,6 +79,32 @@ export class Level1 extends Phaser.Scene
         this.cameras.main.setBounds(0, 0, LEVEL_SIZE.LEVEL1_WIDTH, LEVEL_SIZE.LEVEL1_HEIGHT);
         this.cameras.main.startFollow(this.hero);
 
+        this.loadAnimations();
+
+    }
+
+
+    loadAnimations(){
+        this.anims.create({
+            key: 'hero_run',
+            frames: this.anims.generateFrameNumbers('hero', {start: 2, end: 5}),
+            frameRate: 8,
+            repeat: -1
+        });
+
+         this.anims.create({
+            key: 'run_jumper',
+            frames: this.anims.generateFrameNumbers('hero', {start: 0, end: 3}),
+            frameRate: 10,
+            repeat: -1
+        });
+
+         this.anims.create({
+            key: 'run_slime',
+            frames: this.anims.generateFrameNumbers('hero', {start: 0, end: 3}),
+            frameRate: 8,
+            repeat: -1
+        });
 
 
     }
@@ -75,21 +112,5 @@ export class Level1 extends Phaser.Scene
 
     update()
     { 
-        if(this.cursor.right.isDown){
-            this.hero.setVelocityX(HERO.SPEED);
-            this.hero.flipX = false;
-
-        } 
-        else if(this.cursor.left.isDown){
-            this.hero.setVelocityX(-HERO.SPEED);
-            this.hero.flipX = true;
-        }
-        else 
-            this.hero.setVelocityX(0);
-
-
-        if(this.cursor.space.isDown && this.hero.body.blocked.down && Phaser.Input.Keyboard.DownDuration(this.cursor.space, 250)){
-            this.hero.setVelocityY(HERO.JUMP_FORCE);
-        }
     }
 }
