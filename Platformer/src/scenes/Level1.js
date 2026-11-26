@@ -1,6 +1,8 @@
 import { LEVEL_SIZE, HERO, SCALE } from "../core/constants.js";
 
 import { Jumper } from "../entities/enemies/Jumper.js";
+import { Slime } from "../entities/enemies/Slime.js";
+import { Door }  from "../entities/Door.js";
 import { Hero } from "../entities/Hero.js";
 
 export class Level1 extends Phaser.Scene
@@ -59,15 +61,42 @@ export class Level1 extends Phaser.Scene
 
 
         //hero
-        this.hero = new Hero(this, 65, 100, 'hero');
+
+        this.entries = this.map.getObjectLayer('level1_entities');
+        console.log(this.entries);
+        this.entries.objects.forEach(function(entity){
+
+            console.log(entity);
+            switch(entity.type){
+                case 'Jumper':
+                        let _jumper = new Jumper(this, entity.x,entity.y, 'jumper');
+                        _jumper.setHealth(entity.properties[0].value);
+
+                    break;
+                case 'Slime':
+                    let _slime = new Slime(this, entity.x,entity.y);
+                    _slime.setHealth(entity.properties[0].value);
+                    break;
+                case 'Door':
+                    let _door = new Door(this,entity.x,entity.y).setOrigin(0.5,1);
+                    _door.openDoor();    
+                    if(!entity.properties[0].value){
+                    this.hero = new Hero(this, entity.x,entity.y - 20, 'hero');  
+                    
+                
+                }
+                break;
+                default:
+                    console.log("entidad no reconocida");
+                    break;
+            }
+        },this)
 
 
-        this.jumper = new Jumper(this, 240, 304, 'jumper');
 
-        //entri door
-        this.entry = this.add.sprite(65, 268, 'entry')
-       // this.entry.body.setAllowGravity(false);
-       // this.entry.body.setImmovable(true);
+
+      // this.entry.body.setAllowGravity(false);
+        //this.entry.body.setImmovable(true);
         this.physics.add.collider(this.hero, this.walls);
 
 
@@ -80,6 +109,12 @@ export class Level1 extends Phaser.Scene
         this.cameras.main.startFollow(this.hero);
 
         this.loadAnimations();
+
+
+
+
+
+
 
     }
 
@@ -94,14 +129,21 @@ export class Level1 extends Phaser.Scene
 
          this.anims.create({
             key: 'run_jumper',
-            frames: this.anims.generateFrameNumbers('hero', {start: 0, end: 3}),
+            frames: this.anims.generateFrameNumbers('jumper', {start: 0, end: 3}),
             frameRate: 10,
             repeat: -1
         });
 
          this.anims.create({
             key: 'run_slime',
-            frames: this.anims.generateFrameNumbers('hero', {start: 0, end: 3}),
+            frames: this.anims.generateFrameNumbers('slime', {start: 0, end: 3}),
+            frameRate: 8,
+            repeat: -1
+        });
+
+         this.anims.create({
+            key: 'entry_open',
+            frames: this.anims.generateFrameNumbers('entry', {start: 1, end: 3}),
             frameRate: 8,
             repeat: -1
         });

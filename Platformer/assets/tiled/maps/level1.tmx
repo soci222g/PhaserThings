@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.12.2" orientation="orthogonal" renderorder="left-up" width="40" height="25" tilewidth="32" tileheight="32" infinite="0" nextlayerid="7" nextobjectid="1">
+<map version="1.10" tiledversion="1.12.2" orientation="orthogonal" renderorder="left-up" width="40" height="25" tilewidth="32" tileheight="32" infinite="0" nextlayerid="10" nextobjectid="10">
  <editorsettings>
   <export target="level1.json" format="json"/>
  </editorsettings>
@@ -9,7 +9,10 @@
  <tileset firstgid="13" name="tileset_moss" tilewidth="32" tileheight="32" tilecount="32" columns="8">
   <image source="../tilesets/tileset_moss.png" width="256" height="128"/>
  </tileset>
- <layer id="1" name="level1_layer_walls" width="40" height="25" visible="0">
+ <tileset firstgid="45" name="enitities" tilewidth="32" tileheight="32" tilecount="6" columns="6">
+  <image source="../tilesets/tileset_entities.png" width="192" height="32"/>
+ </tileset>
+ <layer id="1" name="level1_layer_walls" width="40" height="25">
   <data encoding="csv">
 2,8,3,6,6,1,7,10,4,9,6,6,1,9,7,2,8,5,9,2,5,2,10,7,3,11,10,10,11,6,5,8,4,8,1,8,3,2,2,6,
 4,0,0,0,0,0,0,0,0,0,0,1,4,4,8,10,6,2,11,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,
@@ -36,6 +39,35 @@
 11,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,4,7,8,7,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,8,
 2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,11,3,10,6,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,11,
 5,7,7,3,7,4,6,10,3,9,9,7,3,3,11,1,1,9,8,6,9,2,2,3,10,1,5,6,8,7,3,7,9,2,6,8,1,4,11,3
+</data>
+ </layer>
+ <layer id="7" name="Level1_reference_entities" width="40" height="25">
+  <data encoding="csv">
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,50,50,50,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,49,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,46,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,45,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,50,50,50,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,50,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,50,0,0,0,0,0,0,0,
+0,0,0,0,0,0,46,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,50,50,50,0,0,0,50,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,46,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,50,50,50,50,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,50,50,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,48,0,0,45,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,45,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 </data>
  </layer>
  <layer id="3" name="level1_layer_moss_up" width="40" height="25">
@@ -157,4 +189,54 @@
  <imagelayer id="2" name="level1_reference" visible="0" opacity="0.4">
   <image source="references/level_1.jpg" width="1286" height="808"/>
  </imagelayer>
+ <objectgroup id="9" name="level1_entities">
+  <object id="1" name="Jumper02" type="Jumper" x="211" y="762">
+   <properties>
+    <property name="healt" type="int" value="1"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="2" name="Slime01" type="Slime" x="754" y="274">
+   <properties>
+    <property name="health" type="int" value="1"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="3" name="Jumper01" type="Jumper" x="340" y="306">
+   <properties>
+    <property name="healt" type="int" value="2"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="5" name="Jumper03" type="Jumper" x="1136" y="756">
+   <properties>
+    <property name="healt" type="int" value="1"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="6" name="Slime02" type="Slime" x="404" y="564">
+   <properties>
+    <property name="health" type="int" value="1"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="7" name="Slime03" type="Slime" x="210" y="502">
+   <properties>
+    <property name="health" type="int" value="1"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="8" name="Door01" type="Door" x="82" y="288">
+   <properties>
+    <property name="opened" type="bool" value="false"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="9" name="Door02" type="Door" x="112.75" y="767.75">
+   <properties>
+    <property name="Opened" type="bool" value="true"/>
+   </properties>
+   <point/>
+  </object>
+ </objectgroup>
 </map>

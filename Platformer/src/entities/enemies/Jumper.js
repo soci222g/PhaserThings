@@ -1,5 +1,14 @@
 import { LEVEL_SIZE, ENEMY } from "../../core/constants.js  ";
 
+import { Enemy } from "./enemi.js";
+
+export class Jumper extends Enemy{
+    constructor(scene, x, y, texture = 'jumper'){
+        super(scene, x, y, texture);
+        this.anims.play('run_jumper', true);
+    }
+}
+/*
 export class Jumper extends Phaser.Physics.Arcade.Sprite{
 
   
@@ -52,7 +61,7 @@ export class Jumper extends Phaser.Physics.Arcade.Sprite{
     preUpdate(time, delta){
         super.preUpdate(time, delta);
 
-        if(this.body.blocked.right || this.body.touching.right || this.body.blocked.left || this.body.touching.left){
+        if(this.body.blocked.right || this.body.blocked.left){
             this.direction *= -1;
             this.body.setVelocityX(ENEMY.SPEED_ENEMY * this.direction);
             this.flipX = !this.flipX;
@@ -60,4 +69,7 @@ export class Jumper extends Phaser.Physics.Arcade.Sprite{
 
 
     }
-}
+}*/
+
+
+

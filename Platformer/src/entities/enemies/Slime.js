@@ -1,5 +1,17 @@
 import { LEVEL_SIZE, ENEMY } from "../../core/constants.js  ";
+import { Enemy } from "./enemi.js";
 
+export class Slime extends Enemy{
+    constructor(scene, x, y, texture = 'slime'){
+        super(scene, x, y, texture);
+        this.anims.play('run_slime', true);
+    }
+
+    howPatrolWorks(){
+        return (this.body.blocked.left || !this.body.blocked.down ||this.body.blocked.right );
+    }
+}
+/*
 export class Slime extends Phaser.Physics.Arcade.Sprite{
 
   
@@ -49,10 +61,16 @@ export class Slime extends Phaser.Physics.Arcade.Sprite{
 
     }
 
+
     preUpdate(time, delta){
         super.preUpdate(time, delta);
 
-        if(this.body.blocked.right || this.body.touching.right || this.body.blocked.left || this.body.touching.left){
+        if(this.body.blocked.right || this.body.blocked.left){
+            this.direction *= -1;
+            this.body.setVelocityX(ENEMY.SPEED_ENEMY * this.direction);
+            this.flipX = !this.flipX;
+        }
+        else if(this.body.blocked.left || !this.body.blocked.down){
             this.direction *= -1;
             this.body.setVelocityX(ENEMY.SPEED_ENEMY * this.direction);
             this.flipX = !this.flipX;
@@ -60,4 +78,4 @@ export class Slime extends Phaser.Physics.Arcade.Sprite{
 
 
     }
-}
+}*/
